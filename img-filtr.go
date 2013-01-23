@@ -16,6 +16,16 @@ type Command struct {
 	Long   string
 }
 
+func (c *Command) Name() string {
+	name := c.Usage
+	i := strings.Index(name, " ")
+	if i >= 0 {
+		name = name[:i]
+	}
+	return name
+}
+
+
 func runBrdl(cmd *Command, args []string) {
 	img := utils.ReadStdin()
 	img  = recipes.Brdl(img)
@@ -28,13 +38,10 @@ func runDthr(cmd *Command, args []string) {
 	utils.WriteStdout(img)
 }
 
-func (c *Command) Name() string {
-	name := c.Usage
-	i := strings.Index(name, " ")
-	if i >= 0 {
-		name = name[:i]
-	}
-	return name
+func runEdwn(cmd *Command, args []string) {
+	img := utils.ReadStdin()
+	img  = recipes.Edwn(img)
+	utils.WriteStdout(img)
 }
 
 var commands = []*Command{
@@ -51,6 +58,14 @@ var commands = []*Command{
 		Usage: "dthr [options]",
 		Short: "",
 	  Long: `
+...
+`,
+	},
+	&Command{
+		Run:  runEdwn,
+		Usage: "edwn [options]",
+		Short: "",
+		Long: `
 ...
 `,
 	},
