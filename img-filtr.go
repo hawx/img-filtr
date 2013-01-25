@@ -7,6 +7,10 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"image"
+	_ "image/jpeg"
+	_ "image/png"
+	_ "image/gif"
 )
 
 type Command struct {
@@ -32,6 +36,12 @@ func runBrdl(cmd *Command, args []string) {
 	utils.WriteStdout(img)
 }
 
+// func runDazd(cmd *Command, args []string) {
+// 	img := utils.ReadStdin()
+// 	img  = recipes.Dazd(img)
+// 	utils.WriteStdout(img)
+// }
+
 func runDthr(cmd *Command, args []string) {
 	img := utils.ReadStdin()
 	img  = recipes.Dthr(img)
@@ -44,6 +54,41 @@ func runEdwn(cmd *Command, args []string) {
 	utils.WriteStdout(img)
 }
 
+func runHeathr(cmd *Command, args []string) {
+	img := utils.ReadStdin()
+	if len(args) < 2 {
+		utils.Warn("Need an<other> image to compose with!")
+		os.Exit(2)
+	}
+
+	file, err := os.Open(args[1])
+	if err != nil {
+		utils.Warn("Problem opening", args[1])
+		os.Exit(2)
+	}
+
+	other, _, err := image.Decode(file)
+	if err != nil {
+		utils.Warn("Could not decode image, must be jpeg/png/gif.")
+		os.Exit(2)
+	}
+
+	img = recipes.Heathr(img, other)
+	utils.WriteStdout(img)
+}
+
+// func runPostcrd(cmd *Command, args []string) {
+// 	img := utils.ReadStdin()
+// 	img  = recipes.Postcrd(img)
+// 	utils.WriteStdout(img)
+// }
+
+// func runPostr(cmd *Command, args []string) {
+// 	img := utils.ReadStdin()
+// 	img  = recipes.Postr(img)
+// 	utils.WriteStdout(img)
+// }
+
 var commands = []*Command{
 	&Command{
 		Run:   runBrdl,
@@ -53,6 +98,14 @@ var commands = []*Command{
   Repaints the image with a random dominant colour.
 `,
 	},
+// 	&Command{
+// 		Run:   runDazd,
+// 		Usage: "dazd [options]",
+// 		Short: "",
+// 	  Long: `
+// ...
+// `,
+// 	},
 	&Command{
 		Run:   runDthr,
 		Usage: "dthr [options]",
@@ -69,6 +122,30 @@ var commands = []*Command{
 ...
 `,
 	},
+	&Command{
+		Run:   runHeathr,
+		Usage: "heathr <right> [options]",
+		Short: "",
+	  Long: `
+...
+`,
+	},
+// 	&Command{
+// 		Run:   runPostcrd,
+// 		Usage: "postcrd [options]",
+// 		Short: "",
+// 	  Long: `
+// ...
+// `,
+// 	},
+// 	&Command{
+// 		Run:   runPostr,
+// 		Usage: "postr [options]",
+// 		Short: "",
+// 	  Long: `
+// ...
+// `,
+// 	},
 }
 
 func main() {

@@ -6,6 +6,17 @@ import (
 	"image/draw"
 )
 
+func CropToSquare(img image.Image) image.Image {
+	b := img.Bounds()
+
+	rect := image.Rect(b.Min.X, b.Min.X, b.Max.X, b.Max.X)
+	if b.Dx() > b.Dy() {
+		rect = image.Rect(b.Min.Y, b.Min.Y, b.Max.Y, b.Max.Y)
+	}
+
+	return crop(img, rect)
+}
+
 func crop(img image.Image, rect image.Rectangle) image.Image {
 	o := image.NewRGBA(rect)
 
@@ -29,12 +40,7 @@ func Edwn(in image.Image) image.Image {
 
 	// Crop:
 
-	rect := image.Rect(b.Min.X, b.Min.X, b.Max.X, b.Max.X)
-	if b.Dx() > b.Dy() {
-		rect = image.Rect(b.Min.Y, b.Min.Y, b.Max.Y, b.Max.Y)
-	}
-
-	in = crop(in, rect)
+	in = CropToSquare(in)
 
 	// Calculate border widths:
 
