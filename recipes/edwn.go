@@ -36,11 +36,10 @@ const (
 )
 
 func Edwn(in image.Image) image.Image {
-	b := in.Bounds()
-
 	// Crop:
 
 	in = CropToSquare(in)
+	rect := in.Bounds()
 
 	// Calculate border widths:
 
