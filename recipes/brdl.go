@@ -12,9 +12,9 @@ const FACTOR = 10
 
 func Brdl(in image.Image) image.Image {
 	table := map[color.Color] int {}
-	img   := in.(draw.Image)
+	o     := image.NewRGBA(in.Bounds())
 
-	utils.EachColor(img, func(c color.Color) {
+	utils.EachColor(in, func(c color.Color) {
 		if v, ok := table[c]; ok {
 			table[c] = v + 1
 		} else {
@@ -33,7 +33,7 @@ func Brdl(in image.Image) image.Image {
 	}
 
 	brdl := image.NewUniform(c)
-	draw.Draw(img, img.Bounds(), brdl, image.Point{0,0}, draw.Src)
+	draw.Draw(o, o.Bounds(), brdl, image.Point{0,0}, draw.Src)
 
-	return img
+	return o
 }
