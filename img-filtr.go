@@ -36,11 +36,11 @@ func runBrdl(cmd *Command, args []string) {
 	utils.WriteStdout(img)
 }
 
-// func runDazd(cmd *Command, args []string) {
-// 	img := utils.ReadStdin()
-// 	img  = recipes.Dazd(img)
-// 	utils.WriteStdout(img)
-// }
+func runDazd(cmd *Command, args []string) {
+	img := utils.ReadStdin()
+	img  = recipes.Dazd(img)
+	utils.WriteStdout(img)
+}
 
 func runDthr(cmd *Command, args []string) {
 	img := utils.ReadStdin()
@@ -77,17 +77,23 @@ func runHeathr(cmd *Command, args []string) {
 	utils.WriteStdout(img)
 }
 
-// func runPostcrd(cmd *Command, args []string) {
-// 	img := utils.ReadStdin()
-// 	img  = recipes.Postcrd(img)
-// 	utils.WriteStdout(img)
-// }
+func runPostcrd(cmd *Command, args []string) {
+	img := utils.ReadStdin()
+	img  = recipes.Postcrd(img)
+	utils.WriteStdout(img)
+}
 
-// func runPostr(cmd *Command, args []string) {
-// 	img := utils.ReadStdin()
-// 	img  = recipes.Postr(img)
-// 	utils.WriteStdout(img)
-// }
+func runPostr(cmd *Command, args []string) {
+	img := utils.ReadStdin()
+	img  = recipes.Postr(img)
+	utils.WriteStdout(img)
+}
+
+func runRockstr(cmd *Command, args []string) {
+	img := utils.ReadStdin()
+	img  = recipes.Rockstr(img)
+	utils.WriteStdout(img)
+}
 
 var commands = []*Command{
 	&Command{
@@ -98,14 +104,14 @@ var commands = []*Command{
   Repaints the image with a random dominant colour.
 `,
 	},
-// 	&Command{
-// 		Run:   runDazd,
-// 		Usage: "dazd [options]",
-// 		Short: "",
-// 	  Long: `
-// ...
-// `,
-// 	},
+	&Command{
+		Run:   runDazd,
+		Usage: "dazd [options]",
+		Short: "",
+	  Long: `
+...
+`,
+	},
 	&Command{
 		Run:   runDthr,
 		Usage: "dthr [options]",
@@ -130,29 +136,33 @@ var commands = []*Command{
 ...
 `,
 	},
-// 	&Command{
-// 		Run:   runPostcrd,
-// 		Usage: "postcrd [options]",
-// 		Short: "",
-// 	  Long: `
-// ...
-// `,
-// 	},
-// 	&Command{
-// 		Run:   runPostr,
-// 		Usage: "postr [options]",
-// 		Short: "",
-// 	  Long: `
-// ...
-// `,
-// 	},
+	&Command{
+		Run:   runPostcrd,
+		Usage: "postcrd [options]",
+		Short: "",
+	  Long: `
+...
+`,
+	},
+	&Command{
+		Run:   runPostr,
+		Usage: "postr [options]",
+		Short: "",
+	  Long: `
+...
+`,
+	},
+	&Command{
+		Run:   runRockstr,
+		Usage: "rockstr [options]",
+		Short: "",
+	  Long: `
+...
+`,
+	},
 }
 
 func main() {
-	// var long  = flag.Bool("long",  false, "")
-	// var short = flag.Bool("short", false, "")
-	// var usage = flag.Bool("usage", false, "")
-
 	flag.Parse()
 	args := flag.Args()
 
