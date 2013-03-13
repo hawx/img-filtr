@@ -146,7 +146,7 @@ var commands = hadfield.Commands{
 }
 
 var templates = hadfield.Templates{
-Usage: `usage: img filtr [command] [arguments]
+Usage: `Usage: img filtr [command] [arguments]
 
   This is a description.
 
@@ -154,25 +154,27 @@ Usage: `usage: img filtr [command] [arguments]
     {{.Name | printf "%-15s"}} # {{.Short}}{{end}}
 
 `,
-Help: `usage: img filtr {{.Usage}}
+Help: `Usage: img filtr {{.Usage}}
 {{.Long}}
 `,
 }
 
-
 const (
 	USAGE = "filtr [command] [options]"
 	SHORT = "reimplementation of straup/filtr"
-	LONG  = `
-  Various effects.
-`
 )
+
+var longTemplate hadfield.Template = `  This is a description.
+
+  Commands: {{range .}}
+    {{.Name | printf "%-15s"}} # {{.Short}}{{end}}
+`
 
 func main() {
 	args := os.Args
 
 	if len(args) > 1 && args[1] == "--long" {
-		fmt.Println(LONG)
+		longTemplate.Render(os.Stdout, commands.Data())
 	} else if len(args) > 1 && args[1] == "--short" {
 		fmt.Println(SHORT)
 	} else if len(args) > 1 && args[1] == "--usage" {
