@@ -1,60 +1,43 @@
 package main
 
 import (
+	"github.com/hawx/hadfield"
 	"github.com/hawx/img-filtr/recipes"
 	"github.com/hawx/img/utils"
-	"flag"
 	"fmt"
 	"os"
-	"strings"
 	"image"
 	_ "image/jpeg"
 	_ "image/png"
 	_ "image/gif"
 )
 
-type Command struct {
-	Run    func(cmd *Command, args []string)
-	Usage  string
-	Short  string
-	Long   string
-}
 
-func (c *Command) Name() string {
-	name := c.Usage
-	i := strings.Index(name, " ")
-	if i >= 0 {
-		name = name[:i]
-	}
-	return name
-}
-
-
-func runBrdl(cmd *Command, args []string) {
+func runBrdl(cmd *hadfield.Command, args []string) {
 	img := utils.ReadStdin()
 	img  = recipes.Brdl(img)
 	utils.WriteStdout(img)
 }
 
-func runDazd(cmd *Command, args []string) {
+func runDazd(cmd *hadfield.Command, args []string) {
 	img := utils.ReadStdin()
 	img  = recipes.Dazd(img)
 	utils.WriteStdout(img)
 }
 
-func runDthr(cmd *Command, args []string) {
+func runDthr(cmd *hadfield.Command, args []string) {
 	img := utils.ReadStdin()
 	img  = recipes.Dthr(img)
 	utils.WriteStdout(img)
 }
 
-func runEdwn(cmd *Command, args []string) {
+func runEdwn(cmd *hadfield.Command, args []string) {
 	img := utils.ReadStdin()
 	img  = recipes.Edwn(img)
 	utils.WriteStdout(img)
 }
 
-func runHeathr(cmd *Command, args []string) {
+func runHeathr(cmd *hadfield.Command, args []string) {
 	img := utils.ReadStdin()
 	if len(args) < 2 {
 		utils.Warn("Need an<other> image to compose with!")
@@ -77,26 +60,26 @@ func runHeathr(cmd *Command, args []string) {
 	utils.WriteStdout(img)
 }
 
-func runPostcrd(cmd *Command, args []string) {
+func runPostcrd(cmd *hadfield.Command, args []string) {
 	img := utils.ReadStdin()
 	img  = recipes.Postcrd(img)
 	utils.WriteStdout(img)
 }
 
-func runPostr(cmd *Command, args []string) {
+func runPostr(cmd *hadfield.Command, args []string) {
 	img := utils.ReadStdin()
 	img  = recipes.Postr(img)
 	utils.WriteStdout(img)
 }
 
-func runRockstr(cmd *Command, args []string) {
+func runRockstr(cmd *hadfield.Command, args []string) {
 	img := utils.ReadStdin()
 	img  = recipes.Rockstr(img)
 	utils.WriteStdout(img)
 }
 
-var commands = []*Command{
-	&Command{
+var commands = hadfield.Commands{
+	&hadfield.Command{
 		Run:   runBrdl,
 		Usage: "brdl [options]",
 		Short: "the smallest possible transmittable unit",
@@ -104,7 +87,7 @@ var commands = []*Command{
   Repaints the image with a random dominant colour.
 `,
 	},
-	&Command{
+	&hadfield.Command{
 		Run:   runDazd,
 		Usage: "dazd [options]",
 		Short: "",
@@ -112,7 +95,7 @@ var commands = []*Command{
 ...
 `,
 	},
-	&Command{
+	&hadfield.Command{
 		Run:   runDthr,
 		Usage: "dthr [options]",
 		Short: "",
@@ -120,7 +103,7 @@ var commands = []*Command{
 ...
 `,
 	},
-	&Command{
+	&hadfield.Command{
 		Run:  runEdwn,
 		Usage: "edwn [options]",
 		Short: "",
@@ -128,7 +111,7 @@ var commands = []*Command{
 ...
 `,
 	},
-	&Command{
+	&hadfield.Command{
 		Run:   runHeathr,
 		Usage: "heathr <right> [options]",
 		Short: "",
@@ -136,7 +119,7 @@ var commands = []*Command{
 ...
 `,
 	},
-	&Command{
+	&hadfield.Command{
 		Run:   runPostcrd,
 		Usage: "postcrd [options]",
 		Short: "",
@@ -144,7 +127,7 @@ var commands = []*Command{
 ...
 `,
 	},
-	&Command{
+	&hadfield.Command{
 		Run:   runPostr,
 		Usage: "postr [options]",
 		Short: "",
@@ -152,7 +135,7 @@ var commands = []*Command{
 ...
 `,
 	},
-	&Command{
+	&hadfield.Command{
 		Run:   runRockstr,
 		Usage: "rockstr [options]",
 		Short: "",
@@ -162,25 +145,41 @@ var commands = []*Command{
 	},
 }
 
-func main() {
-	flag.Parse()
-	args := flag.Args()
+var templates = hadfield.Templates{
+Usage: `usage: img filtr [command] [arguments]
 
-	for _, cmd := range commands {
-		if cmd.Name() == args[0] {
-			if len(args) > 1 && args[1] == "--long" {
-				fmt.Println(cmd.Long)
-			} else if len(args) > 1 && args[1] == "--short" {
-				fmt.Println(cmd.Short)
-			} else if len(args) > 1 && args[1] == "--usage" {
-				fmt.Println(cmd.Usage)
-			} else {
-				cmd.Run(cmd, args)
-			}
-			os.Exit(0)
-			return
-		}
+  This is a description.
+
+  Commands: {{range .}}
+    {{.Name | printf "%-15s"}} # {{.Short}}{{end}}
+
+`,
+Help: `usage: img filtr {{.Usage}}
+{{.Long}}
+`,
+}
+
+
+const (
+	USAGE = "filtr [command] [options]"
+	SHORT = "reimplementation of straup/filtr"
+	LONG  = `
+  Various effects.
+`
+)
+
+func main() {
+	args := os.Args
+
+	if len(args) > 1 && args[1] == "--long" {
+		fmt.Println(LONG)
+	} else if len(args) > 1 && args[1] == "--short" {
+		fmt.Println(SHORT)
+	} else if len(args) > 1 && args[1] == "--usage" {
+		fmt.Println(USAGE)
+	} else {
+		hadfield.Run(commands, templates)
 	}
 
-	os.Exit(2)
+	os.Exit(0)
 }
