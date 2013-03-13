@@ -1,33 +1,12 @@
 package recipes
 
 import (
+	"github.com/hawx/img/crop"
+	"github.com/hawx/img/utils"
 	"image"
 	"image/color"
 	"image/draw"
 )
-
-func CropToSquare(img image.Image) image.Image {
-	b := img.Bounds()
-
-	rect := image.Rect(b.Min.X, b.Min.X, b.Max.X, b.Max.X)
-	if b.Dx() > b.Dy() {
-		rect = image.Rect(b.Min.Y, b.Min.Y, b.Max.Y, b.Max.Y)
-	}
-
-	return crop(img, rect)
-}
-
-func crop(img image.Image, rect image.Rectangle) image.Image {
-	o := image.NewRGBA(rect)
-
-	for y := rect.Min.Y; y < rect.Max.Y; y++ {
-		for x := rect.Min.X; x < rect.Max.X; x++ {
-			o.Set(x, y, img.At(x, y))
-		}
-	}
-
-	return o
-}
 
 const (
 	TOP_BORDER = 0.1
@@ -38,7 +17,7 @@ const (
 func Edwn(in image.Image) image.Image {
 	// Crop:
 
-	in = CropToSquare(in)
+	in = crop.Square(in, -1, utils.Centre)
 	rect := in.Bounds()
 
 	// Calculate border widths:

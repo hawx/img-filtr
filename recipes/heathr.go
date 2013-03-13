@@ -2,6 +2,8 @@ package recipes
 
 import (
 	"github.com/nfnt/resize"
+	"github.com/hawx/img/utils"
+	"github.com/hawx/img/crop"
 
 	"image"
 	"image/color"
@@ -22,8 +24,8 @@ func Heathr(left, right image.Image) image.Image {
 	// assume left and right have been filtrd before being passed here
 	// this just needs to compose them onto a white background
 
-	left  = CropToSquare(left)
-	right = CropToSquare(right)
+	left  = crop.Square(left, -1, utils.Centre)
+	right = crop.Square(right, -1, utils.Centre)
 
 	leftSize  := left.Bounds().Dx()
 	rightSize := right.Bounds().Dx()
