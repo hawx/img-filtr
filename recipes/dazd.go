@@ -15,9 +15,9 @@ func Dazd(img image.Image) image.Image {
 	img = sharpen.UnsharpMask(img, 2, 1.5, 1.0, 0.05)
 
 	img = utils.MapColor(img, utils.Compose(
-		channel.BrightnessC(utils.Multiplier(1.75)),
-		channel.SaturationC(utils.Multiplier(1.5)),
-		contrast.AdjustC(3.0), // still not right!
+		channel.AdjustC(utils.Multiplier(1.75), channel.Lightness),
+		channel.AdjustC(utils.Multiplier(1.5), channel.Saturation),
+		contrast.AdjustC(3.0),
 	))
 
 	// gaussian with radius=1, sigma=2
