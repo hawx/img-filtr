@@ -81,7 +81,7 @@ func runRockstr(cmd *hadfield.Command, args []string) {
 var commands = hadfield.Commands{
 	&hadfield.Command{
 		Run:   runBrdl,
-		Usage: "brdl [options]",
+		Usage: "brdl",
 		Short: "the smallest possible transmittable unit",
 	  Long: `
   Repaints the image with a random dominant colour.
@@ -89,58 +89,58 @@ var commands = hadfield.Commands{
 	},
 	&hadfield.Command{
 		Run:   runDazd,
-		Usage: "dazd [options]",
-		Short: "",
+		Usage: "dazd",
+		Short: "blown out",
 	  Long: `
-...
+  Lightens, saturates and increases the contrast.
 `,
 	},
 	&hadfield.Command{
 		Run:   runDthr,
-		Usage: "dthr [options]",
-		Short: "",
+		Usage: "dthr",
+		Short: "dithered",
 	  Long: `
-...
+  Turns the image into a dithered pattern of white and black pixels.
 `,
 	},
 	&hadfield.Command{
 		Run:  runEdwn,
-		Usage: "edwn [options]",
-		Short: "",
+		Usage: "edwn",
+		Short: "polaroid",
 		Long: `
-...
+  Cuts the photo into a square and sticks it onto a simplistic polaroid background.
 `,
 	},
 	&hadfield.Command{
 		Run:   runHeathr,
-		Usage: "heathr <right> [options]",
-		Short: "",
+		Usage: "heathr <other>",
+		Short: "polaroids, side-by-side",
 	  Long: `
-...
+  Cuts the photos into squares and sticks them onto simple polaroid-esque backings.
 `,
 	},
 	&hadfield.Command{
 		Run:   runPostcrd,
-		Usage: "postcrd [options]",
-		Short: "",
+		Usage: "postcrd",
+		Short: "saturated",
 	  Long: `
-...
+  Saturates, lightens and blurs the image.
 `,
 	},
 	&hadfield.Command{
 		Run:   runPostr,
-		Usage: "postr [options]",
-		Short: "",
+		Usage: "postr",
+		Short: "dark and saturated",
 	  Long: `
-...
+  Like a darker, subtler version of postcrd.
 `,
 	},
 	&hadfield.Command{
 		Run:   runRockstr,
-		Usage: "rockstr [options]",
-		Short: "",
+		Usage: "rockstr",
+		Short: "etched",
 	  Long: `
-...
+  Almost etches the image onto the screen in pencil.
 `,
 	},
 }
@@ -148,7 +148,7 @@ var commands = hadfield.Commands{
 var templates = hadfield.Templates{
 Usage: `Usage: img filtr [command] [arguments]
 
-  This is a description.
+  An implementation of straup/filtr as a single executable.
 
   Commands: {{range .}}
     {{.Name | printf "%-15s"}} # {{.Short}}{{end}}

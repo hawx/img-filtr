@@ -1,22 +1,24 @@
 # img-filtr
 
-Port of [straup/filtr][filtr] to use img.
+Port of [straup/filtr][filtr] to use [hawx/img][img].
 
-- [ ] brdl
-- [ ] dazd
-- [ ] dthr
-- [ ] dthrpxl (equivalent to `img pxl | img dthr`)
-- [ ] edwn
-- [ ] heathr
-- [ ] postcrd
-- [ ] postr
-- [x] pxl (already in img)
-- [ ] pxldthr (equivalent to `img dthr | img pxl`)
-- [ ] rockstr
+- [x] brdl
+- [x] dazd
+- [x] dthr
+- [x] dthrpxl (equivalent to `img pxl | img dthr`)
+- [x] edwn
+- [x] heathr
+- [x] postcrd
+- [x] postr
+- [x] pxl (in img)
+- [x] pxldthr (equivalent to `img dthr | img pxl`)
+- [x] rockstr
 
 
 May possibly look at adding [rcrowley/curvr][curvr] too.
 
 
+
+[img]:   http://hawx.github.com/img/
 [filtr]: http://straup.github.com/filtr/
 [curvr]: http://rcrowley.org/2007/11/08/introducing-curvr.html
