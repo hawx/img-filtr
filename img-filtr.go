@@ -39,14 +39,14 @@ func runEdwn(cmd *hadfield.Command, args []string) {
 
 func runHeathr(cmd *hadfield.Command, args []string) {
 	img := utils.ReadStdin()
-	if len(args) < 2 {
+	if len(args) < 1 {
 		utils.Warn("Need an<other> image to compose with!")
 		os.Exit(2)
 	}
 
-	file, err := os.Open(args[1])
+	file, err := os.Open(args[0])
 	if err != nil {
-		utils.Warn("Problem opening", args[1])
+		utils.Warn("Problem opening", args[0])
 		os.Exit(2)
 	}
 
