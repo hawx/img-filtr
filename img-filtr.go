@@ -14,31 +14,31 @@ import (
 
 
 func runBrdl(cmd *hadfield.Command, args []string) {
-	img := utils.ReadStdin()
-	img  = recipes.Brdl(img)
-	utils.WriteStdout(img)
+	img, data := utils.ReadStdin()
+	img = recipes.Brdl(img)
+	utils.WriteStdout(img, data)
 }
 
 func runDazd(cmd *hadfield.Command, args []string) {
-	img := utils.ReadStdin()
-	img  = recipes.Dazd(img)
-	utils.WriteStdout(img)
+	img, data := utils.ReadStdin()
+	img = recipes.Dazd(img)
+	utils.WriteStdout(img, data)
 }
 
 func runDthr(cmd *hadfield.Command, args []string) {
-	img := utils.ReadStdin()
-	img  = recipes.Dthr(img)
-	utils.WriteStdout(img)
+	img, data := utils.ReadStdin()
+	img = recipes.Dthr(img)
+	utils.WriteStdout(img, data)
 }
 
 func runEdwn(cmd *hadfield.Command, args []string) {
-	img := utils.ReadStdin()
-	img  = recipes.Edwn(img)
-	utils.WriteStdout(img)
+	img, data := utils.ReadStdin()
+	img = recipes.Edwn(img)
+	utils.WriteStdout(img, data)
 }
 
 func runHeathr(cmd *hadfield.Command, args []string) {
-	img := utils.ReadStdin()
+	img, data := utils.ReadStdin()
 	if len(args) < 1 {
 		utils.Warn("Need an<other> image to compose with!")
 		os.Exit(2)
@@ -57,25 +57,25 @@ func runHeathr(cmd *hadfield.Command, args []string) {
 	}
 
 	img = recipes.Heathr(img, other)
-	utils.WriteStdout(img)
+	utils.WriteStdout(img, data)
 }
 
 func runPostcrd(cmd *hadfield.Command, args []string) {
-	img := utils.ReadStdin()
-	img  = recipes.Postcrd(img)
-	utils.WriteStdout(img)
+	img, data := utils.ReadStdin()
+	img = recipes.Postcrd(img)
+	utils.WriteStdout(img, data)
 }
 
 func runPostr(cmd *hadfield.Command, args []string) {
-	img := utils.ReadStdin()
-	img  = recipes.Postr(img)
-	utils.WriteStdout(img)
+	img, data := utils.ReadStdin()
+	img = recipes.Postr(img)
+	utils.WriteStdout(img, data)
 }
 
 func runRockstr(cmd *hadfield.Command, args []string) {
-	img := utils.ReadStdin()
-	img  = recipes.Rockstr(img)
-	utils.WriteStdout(img)
+	img, data := utils.ReadStdin()
+	img = recipes.Rockstr(img)
+	utils.WriteStdout(img, data)
 }
 
 var commands = hadfield.Commands{
@@ -171,13 +171,14 @@ var longTemplate hadfield.Template = `  This is a description.
 `
 
 func main() {
+	os.Args = utils.GetOutput(os.Args)
 	args := os.Args
 
-	if len(args) > 1 && args[1] == "--long" {
+	if len(args) == 2 && args[1] == "--long" {
 		longTemplate.Render(os.Stdout, commands.Data())
-	} else if len(args) > 1 && args[1] == "--short" {
+	} else if len(args) == 2 && args[1] == "--short" {
 		fmt.Println(SHORT)
-	} else if len(args) > 1 && args[1] == "--usage" {
+	} else if len(args) == 2 && args[1] == "--usage" {
 		fmt.Println(USAGE)
 	} else {
 		hadfield.Run(commands, templates)
