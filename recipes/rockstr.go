@@ -25,7 +25,7 @@ func Rockstr(in image.Image) image.Image {
 
 	in = utils.MapColor(in, utils.Compose(
 		gamma.AdjustC(1.0 / 1.8),
-		greyscale.DefaultC(),
+		greyscale.GreyscaleC(),
 		contrast.AdjustC(1.0),
 	))
 

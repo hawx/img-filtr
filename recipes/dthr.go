@@ -9,7 +9,7 @@ import (
 )
 
 func Dthr(in image.Image) image.Image {
-	img := greyscale.Default(in).(draw.Image)
+	img := greyscale.Greyscale(in).(draw.Image)
 	b := img.Bounds()
 
 	for y := b.Min.Y; y < b.Max.Y; y++ {
