@@ -6,13 +6,12 @@ import (
 	"github.com/hawx/img/contrast"
 	"github.com/hawx/img/gamma"
 	"github.com/hawx/img/greyscale"
-	"github.com/hawx/img/utils"
 	"github.com/hawx/img/sharpen"
+	"github.com/hawx/img/utils"
 	"image"
 )
 
 func Rockstr(in image.Image) image.Image {
-
 	in = sharpen.UnsharpMask(in, 2, 1.5, 1.0, 0.05)
 
 	in = utils.MapColor(in, utils.Compose(
@@ -24,7 +23,7 @@ func Rockstr(in image.Image) image.Image {
 	in = blur.Gaussian(in, 1, 2, blur.WRAP)
 
 	in = utils.MapColor(in, utils.Compose(
-		gamma.AdjustC(1.0 / 1.8),
+		gamma.AdjustC(1.0/1.8),
 		greyscale.GreyscaleC(),
 		contrast.AdjustC(1.0),
 	))

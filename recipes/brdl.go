@@ -11,8 +11,8 @@ import (
 const FACTOR = 10
 
 func Brdl(in image.Image) image.Image {
-	table := map[color.Color] int {}
-	o     := image.NewRGBA(in.Bounds())
+	table := map[color.Color]int{}
+	o := image.NewRGBA(in.Bounds())
 
 	utils.EachColor(in, func(c color.Color) {
 		if v, ok := table[c]; ok {
@@ -25,7 +25,7 @@ func Brdl(in image.Image) image.Image {
 	r := rand.Intn(len(table) / FACTOR)
 	var c color.Color
 
-	for k,_ := range table {
+	for k, _ := range table {
 		r -= 1
 		if r <= 0 {
 			c = k
@@ -33,7 +33,7 @@ func Brdl(in image.Image) image.Image {
 	}
 
 	brdl := image.NewUniform(c)
-	draw.Draw(o, o.Bounds(), brdl, image.Point{0,0}, draw.Src)
+	draw.Draw(o, o.Bounds(), brdl, image.Point{0, 0}, draw.Src)
 
 	return o
 }

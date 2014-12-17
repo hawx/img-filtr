@@ -1,11 +1,11 @@
 package recipes
 
 import (
-	"github.com/hawx/img/utils"
-	"github.com/hawx/img/contrast"
-	"github.com/hawx/img/channel"
 	"github.com/hawx/img/blur"
+	"github.com/hawx/img/channel"
+	"github.com/hawx/img/contrast"
 	"github.com/hawx/img/sharpen"
+	"github.com/hawx/img/utils"
 	"image"
 )
 

@@ -1,8 +1,8 @@
 package recipes
 
 import (
-	"github.com/hawx/img/utils"
 	"github.com/hawx/img/greyscale"
+	"github.com/hawx/img/utils"
 	"image"
 	"image/color"
 	"image/draw"
@@ -27,17 +27,17 @@ func Dthr(in image.Image) image.Image {
 			img.Set(x, y, color.NRGBA{uint8(newGrey), uint8(newGrey), uint8(newGrey), uint8(a)})
 
 			points := []image.Point{
-				image.Point{x+1, y  },
-				image.Point{x+2, y  },
-				image.Point{x-1, y+1},
-				image.Point{x,   y+1},
-				image.Point{x+1, y+1},
-				image.Point{x,   y+2},
+				image.Point{x + 1, y},
+				image.Point{x + 2, y},
+				image.Point{x - 1, y + 1},
+				image.Point{x, y + 1},
+				image.Point{x + 1, y + 1},
+				image.Point{x, y + 2},
 			}
 
 			for _, point := range points {
 				if point.X >= b.Min.X && point.X < b.Max.X && point.Y >= b.Min.Y && point.Y < b.Max.Y {
-					g,_,_,a := utils.NormalisedRGBA(img.At(point.X, point.Y))
+					g, _, _, a := utils.NormalisedRGBA(img.At(point.X, point.Y))
 					ng := uint8(utils.Truncate(uint32(int(g) + err)))
 					newColor := color.NRGBA{ng, ng, ng, uint8(a)}
 					img.Set(point.X, point.Y, newColor)

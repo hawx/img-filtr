@@ -1,17 +1,16 @@
 package main
 
 import (
+	"fmt"
 	"github.com/hawx/hadfield"
 	"github.com/hawx/img-filtr/recipes"
 	"github.com/hawx/img/utils"
-	"fmt"
-	"os"
 	"image"
+	_ "image/gif"
 	_ "image/jpeg"
 	_ "image/png"
-	_ "image/gif"
+	"os"
 )
-
 
 func runBrdl(cmd *hadfield.Command, args []string) {
 	img, data := utils.ReadStdin()
@@ -83,7 +82,7 @@ var commands = hadfield.Commands{
 		Run:   runBrdl,
 		Usage: "brdl",
 		Short: "the smallest possible transmittable unit",
-	  Long: `
+		Long: `
   Repaints the image with a random dominant colour.
 `,
 	},
@@ -91,7 +90,7 @@ var commands = hadfield.Commands{
 		Run:   runDazd,
 		Usage: "dazd",
 		Short: "blown out",
-	  Long: `
+		Long: `
   Lightens, saturates and increases the contrast.
 `,
 	},
@@ -99,12 +98,12 @@ var commands = hadfield.Commands{
 		Run:   runDthr,
 		Usage: "dthr",
 		Short: "dithered",
-	  Long: `
+		Long: `
   Turns the image into a dithered pattern of white and black pixels.
 `,
 	},
 	&hadfield.Command{
-		Run:  runEdwn,
+		Run:   runEdwn,
 		Usage: "edwn",
 		Short: "polaroid",
 		Long: `
@@ -115,7 +114,7 @@ var commands = hadfield.Commands{
 		Run:   runHeathr,
 		Usage: "heathr <other>",
 		Short: "polaroids, side-by-side",
-	  Long: `
+		Long: `
   Cuts the photos into squares and sticks them onto simple polaroid-esque backings.
 `,
 	},
@@ -123,7 +122,7 @@ var commands = hadfield.Commands{
 		Run:   runPostcrd,
 		Usage: "postcrd",
 		Short: "saturated",
-	  Long: `
+		Long: `
   Saturates, lightens and blurs the image.
 `,
 	},
@@ -131,7 +130,7 @@ var commands = hadfield.Commands{
 		Run:   runPostr,
 		Usage: "postr",
 		Short: "dark and saturated",
-	  Long: `
+		Long: `
   Like a darker, subtler version of postcrd.
 `,
 	},
@@ -139,14 +138,14 @@ var commands = hadfield.Commands{
 		Run:   runRockstr,
 		Usage: "rockstr",
 		Short: "etched",
-	  Long: `
+		Long: `
   Almost etches the image onto the screen in pencil.
 `,
 	},
 }
 
 var templates = hadfield.Templates{
-Usage: `Usage: img filtr [command] [arguments]
+	Usage: `Usage: img filtr [command] [arguments]
 
   An implementation of straup/filtr as a single executable.
 
@@ -154,7 +153,7 @@ Usage: `Usage: img filtr [command] [arguments]
     {{.Name | printf "%-15s"}} # {{.Short}}{{end}}
 
 `,
-Help: `Usage: img filtr {{.Usage}}
+	Help: `Usage: img filtr {{.Usage}}
 {{.Long}}
 `,
 }
