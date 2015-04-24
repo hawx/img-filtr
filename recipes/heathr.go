@@ -1,13 +1,13 @@
 package recipes
 
 import (
-	"github.com/hawx/img/crop"
-	"github.com/hawx/img/utils"
-	"github.com/nfnt/resize"
-
 	"image"
 	"image/color"
 	"image/draw"
+
+	"github.com/nfnt/resize"
+	"hawx.me/code/img/crop"
+	"hawx.me/code/img/utils"
 )
 
 func max(a, b int) int {

@@ -1,11 +1,12 @@
 package recipes
 
 import (
-	"github.com/hawx/img/greyscale"
-	"github.com/hawx/img/utils"
 	"image"
 	"image/color"
 	"image/draw"
+
+	"hawx.me/code/img/greyscale"
+	"hawx.me/code/img/utils"
 )
 
 func Dthr(in image.Image) image.Image {

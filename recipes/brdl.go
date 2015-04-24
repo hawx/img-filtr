@@ -1,11 +1,12 @@
 package recipes
 
 import (
-	"github.com/hawx/img/utils"
 	"image"
 	"image/color"
 	"image/draw"
 	"math/rand"
+
+	"hawx.me/code/img/utils"
 )
 
 const FACTOR = 10

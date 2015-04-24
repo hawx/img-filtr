@@ -1,8 +1,9 @@
 package recipes
 
 import (
-	"github.com/hawx/img/blend"
 	"image"
+
+	"hawx.me/code/img/blend"
 )
 
 func Postr(in image.Image) image.Image {

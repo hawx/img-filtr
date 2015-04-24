@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/hawx/hadfield"
-	"github.com/hawx/img-filtr/recipes"
-	"github.com/hawx/img/utils"
 	"image"
 	_ "image/gif"
 	_ "image/jpeg"
 	_ "image/png"
 	"os"
+
+	"github.com/hawx/img-filtr/recipes"
+	"hawx.me/code/hadfield"
+	"hawx.me/code/img/utils"
 )
 
 func runBrdl(cmd *hadfield.Command, args []string) {
@@ -145,7 +146,7 @@ var commands = hadfield.Commands{
 }
 
 var templates = hadfield.Templates{
-	Usage: `Usage: img filtr [command] [arguments]
+	Help: `Usage: img filtr [command] [arguments]
 
   An implementation of straup/filtr as a single executable.
 
@@ -153,7 +154,7 @@ var templates = hadfield.Templates{
     {{.Name | printf "%-15s"}} # {{.Short}}{{end}}
 
 `,
-	Help: `Usage: img filtr {{.Usage}}
+	Command: `Usage: img filtr {{.Usage}}
 {{.Long}}
 `,
 }
@@ -163,7 +164,7 @@ const (
 	SHORT = "reimplementation of straup/filtr"
 )
 
-var longTemplate hadfield.Template = `  This is a description.
+var longTemplate hadfield.Template = `  A reimplementation of straup/filter using img.
 
   Commands: {{range .}}
     {{.Name | printf "%-15s"}} # {{.Short}}{{end}}
@@ -173,15 +174,19 @@ func main() {
 	os.Args = utils.GetOutput(os.Args)
 	args := os.Args
 
-	if len(args) == 2 && args[1] == "--long" {
-		longTemplate.Render(os.Stdout, commands.Data())
-	} else if len(args) == 2 && args[1] == "--short" {
-		fmt.Println(SHORT)
-	} else if len(args) == 2 && args[1] == "--usage" {
-		fmt.Println(USAGE)
-	} else {
-		hadfield.Run(commands, templates)
+	if len(args) == 2 {
+		switch args[1] {
+		case "--long":
+			longTemplate.Render(os.Stdout, commands.Data())
+			return
+		case "--short":
+			fmt.Println(SHORT)
+			return
+		case "--usage":
+			fmt.Println(USAGE)
+			return
+		}
 	}
 
-	os.Exit(0)
+	hadfield.Run(commands, templates)
 }

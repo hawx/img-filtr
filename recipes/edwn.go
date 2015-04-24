@@ -1,11 +1,12 @@
 package recipes
 
 import (
-	"github.com/hawx/img/crop"
-	"github.com/hawx/img/utils"
 	"image"
 	"image/color"
 	"image/draw"
+
+	"hawx.me/code/img/crop"
+	"hawx.me/code/img/utils"
 )
 
 const (

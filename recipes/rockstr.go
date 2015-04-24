@@ -1,14 +1,15 @@
 package recipes
 
 import (
-	"github.com/hawx/img/blur"
-	"github.com/hawx/img/channel"
-	"github.com/hawx/img/contrast"
-	"github.com/hawx/img/gamma"
-	"github.com/hawx/img/greyscale"
-	"github.com/hawx/img/sharpen"
-	"github.com/hawx/img/utils"
 	"image"
+
+	"hawx.me/code/img/blur"
+	"hawx.me/code/img/channel"
+	"hawx.me/code/img/contrast"
+	"hawx.me/code/img/gamma"
+	"hawx.me/code/img/greyscale"
+	"hawx.me/code/img/sharpen"
+	"hawx.me/code/img/utils"
 )
 
 func Rockstr(in image.Image) image.Image {
