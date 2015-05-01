@@ -8,8 +8,8 @@ import (
 	_ "image/png"
 	"os"
 
-	"github.com/hawx/img-filtr/recipes"
 	"hawx.me/code/hadfield"
+	"hawx.me/code/img-filtr/recipes"
 	"hawx.me/code/img/utils"
 )
 

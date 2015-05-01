@@ -5,8 +5,8 @@ ImageMagick/GraphicMagick. This means it is slow, and produces different
 results, if that sounds like the kind of thing you like install:
 
 ``` bash
-$ go get github.com/hawx/img # if not already
-$ go get github.com/hawx/img-filtr
+$ go get hawx.me/code/img # if not already
+$ go get hawx.me/code/img-filtr
 $ img filtr dthr < in.jpg > out.png
 $ img filtr --help
 ...
@@ -27,5 +27,5 @@ $ img filtr drdl --help
 - [x] rockstr
 
 
-[img]:   http://hawx.github.com/img/
+[img]:   http://hawx.me/code/img
 [filtr]: http://straup.github.com/filtr/
